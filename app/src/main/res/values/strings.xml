@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">android-development-assignment-1</string>
+    <string name="tv_display_init">Nothing Selected.</string>
 </resources>
+
