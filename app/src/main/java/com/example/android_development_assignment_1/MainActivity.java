@@ -4,27 +4,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.LocusId;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.text.InputType;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -33,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     private ListView lv_mainlist;
     private ArrayList<String> al_strings;
     private ArrayAdapter<String> aa_strings;
-    ArrayAdapter arrayAdapter;
     String listName;
 
 
@@ -64,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
 
-               //Edit or Delete
+                //Edit or Delete
 
 
                 return false;
@@ -81,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
 
 
     @Override

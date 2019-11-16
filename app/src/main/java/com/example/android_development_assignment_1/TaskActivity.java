@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
@@ -52,6 +53,9 @@ public class TaskActivity extends AppCompatActivity {
         lv_tasks.setAdapter(customAdapter);
 
 
+
+
+
         try {
             SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
             database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked INT," +
@@ -75,7 +79,17 @@ public class TaskActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.mn_add_task:
-                //Go to Task Dialog
+                item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        Intent intent = new Intent(TaskActivity.this, CustomTaskActivity.class);
+                        //intent.putExtra("List Name", lv_mainlist.toString());
+                        startActivity(intent);
+
+                        return false;
+                    }
+                });
+
                 Toast.makeText(this, "New Task Dialog Opened...", Toast.LENGTH_SHORT);
                 return true;
 

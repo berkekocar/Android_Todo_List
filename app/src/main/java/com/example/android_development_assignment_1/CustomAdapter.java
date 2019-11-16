@@ -56,7 +56,6 @@ public class CustomAdapter extends BaseAdapter {
 
             holder = new ViewHolder();
             LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflator.inflate(R.layout.custom_dialog, parent, false);
 
             holder.tv_name = (TextView) convertView.findViewById(R.id.task_name);
             holder.tv_date = (TextView) convertView.findViewById(R.id.task_date);
