@@ -4,12 +4,10 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -17,13 +15,13 @@ public class CustomAdapter extends BaseAdapter {
 
     private Context context;
     private ArrayList<TaskItem> al_items;
-    private TaskActivity taskActivity;
 
 
-    CustomAdapter(Context context, ArrayList<TaskItem> al_items, TaskActivity taskActivity) {
+
+    CustomAdapter(Context context, ArrayList<TaskItem> al_items) {
         this.context = context;
         this.al_items = al_items;
-        this.taskActivity = taskActivity;
+
 
     }
 

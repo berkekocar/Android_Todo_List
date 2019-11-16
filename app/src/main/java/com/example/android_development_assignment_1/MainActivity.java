@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (listName.matches(listName)) {
                 Toast.makeText(MainActivity.this, "Duplicate text!", Toast.LENGTH_SHORT).show();
             } else {
-                String sqlString = "INSERT INTO lists (list_name) VALUES (?)";
+                String sqlString = "INSERT INTO lists (list_name,) VALUES (?)";
                 SQLiteStatement sqLiteStatement = database.compileStatement(sqlString);
                 sqLiteStatement.bindString(1, listName);
                 sqLiteStatement.execute();

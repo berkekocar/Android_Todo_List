@@ -3,15 +3,16 @@ package com.example.android_development_assignment_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.Intent;
+
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,10 +24,15 @@ public class TaskActivity extends AppCompatActivity {
     TextView tv_count_completed_task, tv_count_task, tv_list_name;
     ListView lv_tasks;
     ArrayList<TaskItem> al_items;
+    private String listName;
+    private String taskName;
+    private String taskDate;
+    private String oldTask;
+    private String oldDate;
     private ListView lv_task;
     private CustomAdapter customAdapter;
     private int taskCount;
-    private static int completed;
+    private static int checked;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +47,19 @@ public class TaskActivity extends AppCompatActivity {
 
         al_items = new ArrayList<TaskItem>();
 
-        //customAdapter = new CustomAdapter(this, al_items);
+        customAdapter = new CustomAdapter(this, al_items);
+
         lv_tasks.setAdapter(customAdapter);
 
 
+        try {
+            SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
+            database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked INT," +
+                    "FOREIGN KEY(list_name) REFERENCES Lists(list_name), PRIMARY KEY(list_name,task_name) )");
 
-
+        } catch (Exception e) {
+            System.out.println("Exception occured!");
+        }
 
 
     }
@@ -70,4 +83,52 @@ public class TaskActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void save(View view) {
+
+        try {
+            SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
+            database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked INT," +
+                    "FOREIGN KEY(list_name) REFERENCES Lists(list_name), PRIMARY KEY(list_name,task_name) )");
+            if (listName.isEmpty()) {
+                Toast.makeText(this, "List name must be filled!", Toast.LENGTH_SHORT).show();
+            } else if (listName.matches(listName)) {
+                Toast.makeText(this, "Duplicate text!", Toast.LENGTH_SHORT).show();
+            } else {
+                String sqlString = "INSERT INTO tasks (list_name, task_name, due_date, completed) VALUES (?,?,?,?)";
+                SQLiteStatement sqLiteStatement = database.compileStatement(sqlString);
+                sqLiteStatement.bindString(1, listName);
+                sqLiteStatement.execute();
+            }
+
+
+        } catch (Exception e) {
+            System.out.println("Exception occured!");
+        }
+
+
+    }
+
+    public void getData() {
+
+        try {
+            SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
+            Cursor cursor = database.rawQuery("SELECT * FROM Tasks", null);
+            int listIx = cursor.getColumnIndex("list_name");
+            int taskIx = cursor.getColumnIndex("task_name");
+            int dateIx = cursor.getColumnIndex("due_date");
+            int compIx = cursor.getColumnIndex("checked");
+            while (cursor.moveToNext()) {
+
+
+            }
+            customAdapter.notifyDataSetChanged();
+            cursor.close();
+        } catch (Exception e) {
+            System.out.println("Exception occured!");
+        }
+
+
+    }
+
+
 }
