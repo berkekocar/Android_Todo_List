@@ -3,6 +3,7 @@ package com.example.android_development_assignment_1;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,6 +37,16 @@ public class TaskActivity extends AppCompatActivity {
         tv_count_task = (TextView) findViewById(R.id.tv_count_task);
         tv_list_name = (TextView) findViewById(R.id.tv_list_name);
         lv_tasks = (ListView) findViewById(R.id.lv_tasks);
+
+
+        al_items = new ArrayList<TaskItem>();
+
+        //customAdapter = new CustomAdapter(this, al_items);
+        lv_tasks.setAdapter(customAdapter);
+
+
+
+
 
 
     }
