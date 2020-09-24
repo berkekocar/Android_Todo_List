@@ -3,13 +3,13 @@ package com.example.android_development_assignment_1;
 public class TaskItem {
 
     private String list, name, date;
-    private int complete;
+    private int checked;
 
-    public TaskItem(String list, String name, String date, int complete) {
+    public TaskItem(String list, String name, String date, int checked) {
         this.list = list;
         this.name = name;
         this.date = date;
-        this.complete = complete;
+        this.checked = checked;
     }
 
     public String getList() {
@@ -37,11 +37,11 @@ public class TaskItem {
     }
 
     public int getComplete() {
-        return complete;
+        return checked;
     }
 
     public void setComplete(int complete) {
-        this.complete = complete;
+        this.checked = complete;
     }
 
 

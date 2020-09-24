@@ -70,7 +70,6 @@ public class CustomAdapter extends BaseAdapter {
         holder.tv_name.setText(al_items.get(position).getName());
         holder.tv_date.setText(al_items.get(position).getDate());
         holder.checkbox.setTag(al_items.get(position).getName());
-        //holder.checkbox.setChecked(al_items.get(position).getComplete());
 
         return convertView;
 

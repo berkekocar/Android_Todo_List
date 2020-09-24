@@ -1,5 +1,7 @@
 package com.example.android_development_assignment_1;
 
+
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -26,9 +28,6 @@ public class CustomTaskActivity extends AppCompatActivity {
         tv_task_date = findViewById(R.id.tv_task_date);
         cv_task_date = findViewById(R.id.cv_task_date);
         btn = findViewById(R.id.btn);
-
-
-
 
 
     }

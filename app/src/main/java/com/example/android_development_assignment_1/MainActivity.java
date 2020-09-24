@@ -126,6 +126,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "User Input is: " + et.getText().toString(), Toast.LENGTH_LONG).show();
             }
         });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                al_strings.add(et.getText().toString());
+                aa_strings.notifyDataSetChanged();
+                listName = et.getText().toString();
+
+
+                Toast.makeText(MainActivity.this, "Process canceled! " + et.getText().toString(), Toast.LENGTH_LONG).show();
+            }
+        });
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -140,10 +152,8 @@ public class MainActivity extends AppCompatActivity {
             database.execSQL("CREATE TABLE IF NOT EXISTS lists (list_name VARCHAR PRIMARY KEY)");
             if (listName.isEmpty()) {
                 Toast.makeText(MainActivity.this, "List name must be filled!", Toast.LENGTH_SHORT).show();
-            } else if (listName.matches(listName)) {
-                Toast.makeText(MainActivity.this, "Duplicate text!", Toast.LENGTH_SHORT).show();
             } else {
-                String sqlString = "INSERT INTO lists (list_name,) VALUES (?)";
+                String sqlString = "INSERT INTO lists (list_name) VALUES (?)";
                 SQLiteStatement sqLiteStatement = database.compileStatement(sqlString);
                 sqLiteStatement.bindString(1, listName);
                 sqLiteStatement.execute();
@@ -153,8 +163,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             System.out.println("Exception occured!");
         }
-
-
     }
 
     public void getData() {

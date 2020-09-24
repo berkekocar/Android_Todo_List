@@ -28,12 +28,9 @@ public class TaskActivity extends AppCompatActivity {
     private String listName;
     private String taskName;
     private String taskDate;
-    private String oldTask;
-    private String oldDate;
     private ListView lv_task;
     private CustomAdapter customAdapter;
-    private int taskCount;
-    private static int checked;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +50,9 @@ public class TaskActivity extends AppCompatActivity {
         lv_tasks.setAdapter(customAdapter);
 
 
-
-
-
         try {
             SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
-            database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked INT," +
+            database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked BOOLEAN," +
                     "FOREIGN KEY(list_name) REFERENCES Lists(list_name), PRIMARY KEY(list_name,task_name) )");
 
         } catch (Exception e) {
@@ -97,12 +91,13 @@ public class TaskActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+
     public void save(View view) {
 
         try {
             SQLiteDatabase database = this.openOrCreateDatabase("Tasks", MODE_PRIVATE, null);
             database.execSQL("CREATE TABLE IF NOT EXISTS tasks (list_name VARCHAR,task_name VARCHAR,due_date VARCHAR,checked INT," +
-                    "FOREIGN KEY(list_name) REFERENCES Lists(list_name), PRIMARY KEY(list_name,task_name) )");
+                    "FOREIGN KEY(list_name) REFERENCES Lists(list_name), PRIMARY KEY(task_name))");
             if (listName.isEmpty()) {
                 Toast.makeText(this, "List name must be filled!", Toast.LENGTH_SHORT).show();
             } else if (listName.matches(listName)) {
@@ -130,9 +125,9 @@ public class TaskActivity extends AppCompatActivity {
             int listIx = cursor.getColumnIndex("list_name");
             int taskIx = cursor.getColumnIndex("task_name");
             int dateIx = cursor.getColumnIndex("due_date");
-            int compIx = cursor.getColumnIndex("checked");
+            int checkedIx = cursor.getColumnIndex("checked");
             while (cursor.moveToNext()) {
-
+                //Cursor all database by all index.
 
             }
             customAdapter.notifyDataSetChanged();
